@@ -1,6 +1,6 @@
 # Mandelbrot Viewer
 
-A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal. This is a rewrite of the older and slower [mandelbrotVisualizer](https://github.com/Vitaspiros/mandelbrotVisualizer), which is written in Java.
+A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal. This is a rewrite of the older and slower [mandelbrotVisualizer](https://github.com/Vitaspiros/mandelbrotVisualizer-old), which is written in Java.
 
 ## Configuration
 There is no configuration options right now (except from tweaking the code). 
