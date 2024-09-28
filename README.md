@@ -7,6 +7,10 @@ There is no configuration options right now (except from tweaking the code).
 I will need to add them later. 
 Right now the program computes the fractal with 500 iterations.
 
+## Features
+- Render the fractal with colors
+- Pan, zoom in and out
+
 ## Compiling and Running
 ```
 make
