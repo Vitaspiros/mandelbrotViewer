@@ -6,7 +6,7 @@ uniform double fractalScalar;
 uniform double zoomingOffsetX;
 uniform double zoomingOffsetY;
 
-const int ITERATIONS = 500;
+uniform int iterations;
 
 // Thanks to https://stackoverflow.com/a/17897228
 vec3 hsv2rgb(vec3 c)
@@ -39,7 +39,7 @@ int mandelbrot(int iter, dvec2 pixel) {
 
 void main() {
     dvec2 uv = dvec2(colorVertex.xy); // omit the z axis and convert the vector into a double vector
-    int exitedOnIteration = mandelbrot(ITERATIONS, uv);
+    int exitedOnIteration = mandelbrot(iterations, uv);
     float clampedColor = exitedOnIteration/5 * 0.1;
     vec3 hsvColor = hsv2rgb(vec3(clampedColor, 0.5, (clampedColor >= 0.9 ? 0.9 : clampedColor)));
     fragmentColor = vec4(hsvColor, 1.0);

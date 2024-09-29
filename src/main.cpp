@@ -2,6 +2,8 @@
 #include "shader.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <cstring>
+#include <cstdio>
 
 #define WIDTH 1280
 #define HEIGHT 900
@@ -27,6 +29,7 @@ int sign = 1;
 bool isZooming = false;
 double xOffset = 0.0f;
 double yOffset = 0.0f;
+int iterations = 500;
 
 void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
@@ -53,7 +56,18 @@ void processMouseClick(GLFWwindow* window) {
     }
 }
 
-int main() {
+int main(int argc, char **argv) {
+    if (argc > 1) {
+        if (!strcmp(argv[1], "-h" ) || !strcmp(argv[1], "--help")) {
+            puts("Mandelbrot Viewer: A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal\n"
+                "Parameters:\n"
+                "-h, --help:            show this info\n"
+                "-i, --iterations num   iterate num times");
+            return 0;
+        } else if (argc > 2 && (!strcmp(argv[1], "-i") || !strcmp(argv[1], "--iterations")))
+            sscanf(argv[2], "%d", &iterations);
+    }
+
     if (!glfwInit()) {
         const char* description = new char[256];
         glfwGetError(&description);
@@ -118,6 +132,7 @@ int main() {
     // VERTEX ARRAY LINKING
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glUniform1i(glGetUniformLocation(shaderProgram, "iterations"), iterations);
 
     while (!glfwWindowShouldClose(window)) {
         processMouseClick(window);
