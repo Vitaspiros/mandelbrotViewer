@@ -22,11 +22,11 @@ unsigned int indices[] = {
     2, 3, 0
 };
 
-float scalar = 1.0f;
+double scalar = 1.0f;
 int sign = 1;
 bool isZooming = false;
-float xOffset = 0.0f;
-float yOffset = 0.0f;
+double xOffset = 0.0f;
+double yOffset = 0.0f;
 
 void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
@@ -125,9 +125,9 @@ int main() {
         glBindVertexArray(VAO);
         glUseProgram(shaderProgram);
         // set the uniform values
-        glUniform1f(glGetUniformLocation(shaderProgram, "fractalScalar"), 1/scalar);
-        glUniform1f(glGetUniformLocation(shaderProgram, "zoomingOffsetX"), xOffset);
-        glUniform1f(glGetUniformLocation(shaderProgram, "zoomingOffsetY"), yOffset);
+        glUniform1d(glGetUniformLocation(shaderProgram, "fractalScalar"), 1/scalar);
+        glUniform1d(glGetUniformLocation(shaderProgram, "zoomingOffsetX"), xOffset);
+        glUniform1d(glGetUniformLocation(shaderProgram, "zoomingOffsetY"), yOffset);
         // draw using the EBO
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
