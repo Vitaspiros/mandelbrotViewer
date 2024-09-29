@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
             std::cout << "Mandelbrot Viewer: A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal\n"
                 "Parameters:\n"
                 "-h, --help            show this info\n"
-                "-i, --iterations num   iterate num times\n";
+                "-i, --iterations num   construct fractal with num iterations (default is 500)\n";
             return 0;
         } else if (argc > 2 && (!strcmp(argv[1], "-i") || !strcmp(argv[1], "--iterations")))
             iterations = atoi(argv[2]);
