@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <cstring>
-#include <cstdio>
+#include <cstdlib>
 
 #define WIDTH 1280
 #define HEIGHT 900
@@ -59,13 +59,13 @@ void processMouseClick(GLFWwindow* window) {
 int main(int argc, char **argv) {
     if (argc > 1) {
         if (!strcmp(argv[1], "-h" ) || !strcmp(argv[1], "--help")) {
-            puts("Mandelbrot Viewer: A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal\n"
+            std::cout << "Mandelbrot Viewer: A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal\n"
                 "Parameters:\n"
                 "-h, --help:            show this info\n"
-                "-i, --iterations num   iterate num times");
+                "-i, --iterations num   iterate num times\n";
             return 0;
         } else if (argc > 2 && (!strcmp(argv[1], "-i") || !strcmp(argv[1], "--iterations")))
-            sscanf(argv[2], "%d", &iterations);
+            iterations = atoi(argv[2]);
     }
 
     if (!glfwInit()) {
