@@ -18,6 +18,15 @@ make
 ```
 Required dependencies: glfw3
 
+#### Double and single precision
+I recently made a change that uses double precision instead of single precision. While this enables you to
+zoom further into the fractal, it causes the program to be slower. If you want to regain the performance,
+and you don't care about the zoom level, you can apply the patch in the patches directory using:
+```
+git apply patches/float.patch
+```
+
+
 ## Screenshots
 ![Screenshot of program when it starts up](images/screenshot1.png)
 ![Screenshot of zoomed in Mandelbrot fractal](images/screenshot2.png)
