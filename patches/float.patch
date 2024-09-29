@@ -1,0 +1,78 @@
+diff --git a/src/main.cpp b/src/main.cpp
+index d21f6a5..a367f04 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -22,11 +22,11 @@ unsigned int indices[] = {
+     2, 3, 0
+ };
+ 
+-double scalar = 1.0f;
++float scalar = 1.0f;
+ int sign = 1;
+ bool isZooming = false;
+-double xOffset = 0.0f;
+-double yOffset = 0.0f;
++float xOffset = 0.0f;
++float yOffset = 0.0f;
+ 
+ void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
+     glViewport(0, 0, width, height);
+@@ -125,9 +125,9 @@ int main() {
+         glBindVertexArray(VAO);
+         glUseProgram(shaderProgram);
+         // set the uniform values
+-        glUniform1d(glGetUniformLocation(shaderProgram, "fractalScalar"), 1/scalar);
+-        glUniform1d(glGetUniformLocation(shaderProgram, "zoomingOffsetX"), xOffset);
+-        glUniform1d(glGetUniformLocation(shaderProgram, "zoomingOffsetY"), yOffset);
++        glUniform1f(glGetUniformLocation(shaderProgram, "fractalScalar"), 1/scalar);
++        glUniform1f(glGetUniformLocation(shaderProgram, "zoomingOffsetX"), xOffset);
++        glUniform1f(glGetUniformLocation(shaderProgram, "zoomingOffsetY"), yOffset);
+         // draw using the EBO
+         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+ 
+diff --git a/src/shaders/fragment.glsl b/src/shaders/fragment.glsl
+index 19d452a..796edf1 100644
+--- a/src/shaders/fragment.glsl
++++ b/src/shaders/fragment.glsl
+@@ -2,9 +2,9 @@
+ in vec3 colorVertex;
+ out vec4 fragmentColor;
+ 
+-uniform double fractalScalar;
+-uniform double zoomingOffsetX;
+-uniform double zoomingOffsetY;
++uniform float fractalScalar;
++uniform float zoomingOffsetX;
++uniform float zoomingOffsetY;
+ 
+ const int ITERATIONS = 500;
+ 
+@@ -16,15 +16,15 @@ vec3 hsv2rgb(vec3 c)
+     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+ }
+ 
+-int mandelbrot(int iter, dvec2 pixel) {
++int mandelbrot(int iter, vec2 pixel) {
+     // convert pixel to range (0, 2)
+-    dvec2 c = dvec2(pixel.x * fractalScalar*2 + zoomingOffsetX, pixel.y * fractalScalar*2 - zoomingOffsetY);
++    vec2 c = vec2(pixel.x * fractalScalar*2 + zoomingOffsetX, pixel.y * fractalScalar*2 - zoomingOffsetY);
+ 
+     // I use vec2 to represent complex numbers, where x is the real part and y the imaginary part
+-    dvec2 z = dvec2(0.0);
++    vec2 z = vec2(0.0);
+     for (int i = 0; i < iter; i++) {
+         // square z
+-        double x = z.x;
++        float x = z.x;
+         z.x = x * x - z.y * z.y;
+         z.y = x * z.y * 2;
+ 
+@@ -38,7 +38,7 @@ int mandelbrot(int iter, dvec2 pixel) {
+ }
+ 
+ void main() {
+-    dvec2 uv = dvec2(colorVertex.xy); // omit the z axis and convert the vector into a double vector
++    vec2 uv = vec2(colorVertex.xy); // omit the z axis and convert the vector into a double vector
+     int exitedOnIteration = mandelbrot(ITERATIONS, uv);
+     float clampedColor = exitedOnIteration/5 * 0.1;
+     vec3 hsvColor = hsv2rgb(vec3(clampedColor, 0.5, (clampedColor >= 0.9 ? 0.9 : clampedColor)));
