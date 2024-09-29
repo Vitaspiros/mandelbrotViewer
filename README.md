@@ -7,6 +7,7 @@ You can now pass in a custom number of iterations by using the `-i` flag:
 ```bash
 ./main.out -i 1000 # or --iterations
 ```
+The default is 500 iterations.
 
 ## Features
 - Render the fractal with colors
