@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
         if (!strcmp(argv[1], "-h" ) || !strcmp(argv[1], "--help")) {
             std::cout << "Mandelbrot Viewer: A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal\n"
                 "Parameters:\n"
-                "-h, --help:            show this info\n"
+                "-h, --help            show this info\n"
                 "-i, --iterations num   iterate num times\n";
             return 0;
         } else if (argc > 2 && (!strcmp(argv[1], "-i") || !strcmp(argv[1], "--iterations")))
