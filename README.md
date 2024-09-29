@@ -3,16 +3,17 @@
 A simple program written in C++ and OpenGL that renders the Mandelbrot Fractal. This is a rewrite of the older and slower [mandelbrotVisualizer](https://github.com/Vitaspiros/mandelbrotVisualizer-old), which is written in Java.
 
 ## Configuration
-There is no configuration options right now (except from tweaking the code). 
-I will need to add them later. 
-Right now the program computes the fractal with 500 iterations.
+You can now pass in a custom number of iterations by using the `-i` flag:
+```bash
+./main.out -i 1000 # or --iterations
+```
 
 ## Features
 - Render the fractal with colors
 - Pan, zoom in and out
 
 ## Compiling and Running
-```
+```bash
 make
 ./main.out
 ```
